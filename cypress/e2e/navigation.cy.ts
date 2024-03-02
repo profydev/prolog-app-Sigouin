@@ -93,3 +93,67 @@ describe("Sidebar Navigation", () => {
     });
   });
 });
+
+describe("Footer Navigation", () => {
+  beforeEach(() => {
+    cy.visit("http://localhost:3000/dashboard");
+  });
+
+  context("desktop resolution", () => {
+    beforeEach(() => {
+      cy.viewport(1025, 900);
+    });
+
+    it("links are working", () => {
+      cy.get("footer").contains("Version:").should("exist");
+
+      cy.get("footer")
+        .contains("Version:")
+        .should(($version) => {
+          const versionText = $version.text();
+          expect(versionText).to.match(/Version: \d+\.\d+\.\d+/);
+        });
+
+      cy.get("footer")
+        .contains("Docs")
+        .should("have.attr", "href", "/dashboard#");
+      cy.get("footer")
+        .contains("API")
+        .should("have.attr", "href", "/dashboard#");
+      cy.get("footer")
+        .contains("Help")
+        .should("have.attr", "href", "/dashboard#");
+      cy.get("footer")
+        .contains("Community")
+        .should("have.attr", "href", "/dashboard#");
+    });
+  });
+  context("mobile resolution", () => {
+    beforeEach(() => {
+      cy.viewport("iphone-8");
+    });
+    it("links are working", () => {
+      cy.get("footer").contains("Version:").should("exist");
+
+      cy.get("footer")
+        .contains("Version:")
+        .should(($version) => {
+          const versionText = $version.text();
+          expect(versionText).to.match(/Version: \d+\.\d+\.\d+/);
+        });
+
+      cy.get("footer")
+        .contains("Docs")
+        .should("have.attr", "href", "/dashboard#");
+      cy.get("footer")
+        .contains("API")
+        .should("have.attr", "href", "/dashboard#");
+      cy.get("footer")
+        .contains("Help")
+        .should("have.attr", "href", "/dashboard#");
+      cy.get("footer")
+        .contains("Community")
+        .should("have.attr", "href", "/dashboard#");
+    });
+  });
+});
