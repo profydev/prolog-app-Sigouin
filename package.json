@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "cross-env NEXT_PUBLIC_REACT_APP_VERSION=$(node -p \"require('./package.json').version\") next dev",
     "build": "cross-env NEXT_PUBLIC_REACT_APP_VERSION=$(node -p \"require('./package.json').version\") next build",
-
     "start": "next start",
     "lint:code": "eslint --ignore-path .gitignore .",
     "lint:styles": "stylelint  --ignore-path .gitignore \"**/*.scss\"",
