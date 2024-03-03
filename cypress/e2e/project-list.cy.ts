@@ -40,3 +40,16 @@ describe("Project List", () => {
     });
   });
 });
+
+describe("Loading Indicator Test", () => {
+  it("Displays loading indicator during data fetching", () => {
+    cy.intercept("GET", "https://prolog-api.profy.dev/project").as(
+      "getProjects",
+    );
+    cy.visit("http://localhost:3000/dashboard");
+    cy.get('[data-testid="loading-indicator"]').should("be.visible");
+    cy.wait("@getProjects").then(() => {
+      cy.get('[data-testid="loading-indicator"]').should("not.exist");
+    });
+  });
+});
