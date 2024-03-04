@@ -1,0 +1,35 @@
+@use "@styles/font";
+@use "@styles/breakpoint";
+@use "@styles/color";
+@use "@styles/space";
+
+.alert {
+  display: flex;
+  padding: space.$s4;
+  justify-content: center;
+  align-items: center;
+  gap: space.$s3;
+  border-radius: space.$s2;
+  border: 1px solid color.$error-300;
+  background: color.$error-25;
+
+  .content,
+  .tryAgain {
+    color: color.$error-700;
+    font: font.$text-sm-medium;
+  }
+
+  .content {
+    display: flex;
+    align-items: flex-start;
+    flex: 1 0 0;
+    gap: space.$s3;
+  }
+
+  .tryAgain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: space.$s2;
+  }
+}

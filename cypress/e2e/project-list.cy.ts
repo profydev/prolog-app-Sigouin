@@ -53,3 +53,27 @@ describe("Loading Indicator Test", () => {
     });
   });
 });
+
+describe("Error Screen Test", () => {
+  it("shows an error message", () => {
+    // setup request mock
+    cy.intercept(
+      { url: "https://prolog-api.profy.dev/project", times: 4 },
+      {
+        statusCode: 500,
+      },
+    );
+
+    // open projects page
+    cy.visit("http://localhost:3000/dashboard");
+
+    // check that the error message is shown
+    cy.get("[data-testid='projects-error-message']", { timeout: 15000 })
+      .should("be.visible")
+      // click retry button
+      .find("button")
+      .click();
+
+    cy.get("[data-testid='project-list']").should("be.visible");
+  });
+});
