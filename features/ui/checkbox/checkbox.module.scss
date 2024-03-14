@@ -17,7 +17,6 @@
 .checkboxInput {
   position: relative;
   appearance: none;
-  appearance: none;
   cursor: pointer;
   background-color: white;
   border: 1px solid color.$gray-300;
@@ -38,13 +37,7 @@
     border-color: color.$primary-300;
   }
 
-  &:checked,
-  &.indeterminate:checked {
-    background-color: color.$primary-50;
-    border-color: color.$primary-600;
-  }
-
-  .checkboxInput::before {
+  &:checked::before {
     content: "";
     position: absolute;
     top: 50%;
@@ -55,27 +48,31 @@
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-    visibility: hidden;
+    visibility: visible; // changed from hidden
     background-image: url("../../../public/icons/check.svg");
   }
 
-  .checkboxInput.indeterminate:checked::before {
+  &.indeterminate:checked::before {
     visibility: visible;
     background-image: url("../../../public/icons/minus.svg");
+  }
+
+  &:disabled:checked::before {
+    // adjusted selector
+    visibility: visible;
+    background-image: url("../../../public/icons/check_gray.svg");
+  }
+
+  &:disabled.indeterminate:checked::before {
+    // adjusted selector
+    visibility: visible;
+    background-image: url("../../../public/icons/minus_gray.svg");
   }
 
   &:disabled {
     background-color: color.$gray-100;
     border-color: color.$gray-200;
     cursor: not-allowed;
-
-    &::before {
-      background-image: url("../../../public/icons/check_gray.svg");
-    }
-
-    &.indeterminate:disabled::before {
-      background-image: url("../../../public/icons/minus_gray.svg");
-    }
   }
 
   &:not(:checked, :disabled):hover {
@@ -88,8 +85,4 @@
     background-color: color.$primary-50;
     border-color: color.$primary-600;
   }
-}
-
-.checkboxInput:checked::before {
-  visibility: visible;
 }
