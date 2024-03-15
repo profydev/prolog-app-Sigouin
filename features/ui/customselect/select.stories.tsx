@@ -1,18 +1,19 @@
 import { Meta, StoryFn } from "@storybook/react";
-import { Select } from "./select";
+import { CustomSelect } from "./customselect";
+// import Select from "react-select";
 
 export default {
   title: "UI/Select",
-  component: Select,
+  component: CustomSelect,
   tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
   },
-} as Meta<typeof Select>;
+} as Meta<typeof CustomSelect>;
 
-const Template: StoryFn<typeof Select> = ({ children }) => (
+const Template: StoryFn<typeof CustomSelect> = () => (
   <div>
-    <Select>{children}</Select>
+    <CustomSelect />
   </div>
 );
 
