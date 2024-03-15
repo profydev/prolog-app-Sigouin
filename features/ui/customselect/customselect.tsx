@@ -1,4 +1,18 @@
 import Select from "react-select";
+import { useState } from "react";
+
+type OptionType = {
+  value: string;
+  label: string;
+};
+
+type ValueType = OptionType | OptionType[] | null;
+
+type CustomSelectProps = {
+  label?: string;
+  hint?: string;
+  error?: string;
+};
 
 const names = [
   { value: "Olivia Rhye", label: "Olivia Rhye" },
@@ -10,15 +24,33 @@ const names = [
   { value: "Drew Cano", label: "Drew Cano" },
 ];
 
-// type SelectProps = {
-//   children?: React.ReactNode;
-// };
+export function CustomSelect({ label, hint, error }: CustomSelectProps) {
+  const [isErrorShown, setIsErrorShown] = useState(false);
 
-export function CustomSelect() {
+  const handleFocus = () => {
+    setIsErrorShown(false);
+  };
+
+  const handleChange = (selectedOption: ValueType) => {
+    if (!selectedOption) {
+      setIsErrorShown(true);
+    } else {
+      setIsErrorShown(false);
+    }
+  };
+
   return (
     <div>
-      <label>Team member</label>
-      <Select placeholder="Select team member" options={names} />
+      <label>{label}</label>
+      <Select
+        placeholder="Select team member"
+        options={names}
+        className={isErrorShown ? "error" : ""}
+        onFocus={handleFocus}
+        onChange={handleChange}
+      />
+      {hint && !isErrorShown && <p className="hint">{hint}</p>}
+      {error && <p className="error">{error}</p>}
     </div>
   );
 }

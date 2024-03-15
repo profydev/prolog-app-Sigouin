@@ -1,6 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react";
 import { CustomSelect } from "./customselect";
-// import Select from "react-select";
 
 export default {
   title: "UI/Select",
@@ -11,13 +10,15 @@ export default {
   },
 } as Meta<typeof CustomSelect>;
 
-const Template: StoryFn<typeof CustomSelect> = () => (
+const Template: StoryFn<typeof CustomSelect> = (args) => (
   <div>
-    <CustomSelect />
+    <CustomSelect {...args} />
   </div>
 );
 
 export const Default = Template.bind({});
 Default.args = {
-  children: "Default Select",
+  label: "",
+  hint: "",
+  error: "",
 };
