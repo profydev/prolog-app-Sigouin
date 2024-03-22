@@ -9,6 +9,7 @@ export default {
     hint: { control: "text" },
     error: { control: "boolean" },
     disabled: { control: "boolean" },
+    icon: { control: "text" },
   },
   tags: ["autodocs"],
   parameters: {
@@ -38,4 +39,11 @@ export const WithError = Template.bind({});
 WithError.args = {
   ...Default.args,
   error: true,
+};
+
+export const WithIcon = Template.bind({});
+WithIcon.args = {
+  label: "Team member",
+  hint: "This is a hint text to help user.",
+  icon: "👩‍💻",
 };
