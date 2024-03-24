@@ -1,0 +1,15 @@
+@use "@styles/color";
+@use "@styles/font";
+@use "@styles/space";
+
+.hintFont {
+  color: color.$gray-500;
+  font: font.$text-sm-regular;
+  margin: 0;
+}
+
+.errorFont {
+  color: color.$error-500;
+  font: font.$text-sm-regular;
+  margin: 0;
+}
