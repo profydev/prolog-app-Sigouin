@@ -1,52 +1,60 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./input.module.scss";
 
 interface InputProps {
+  type: "text" | "number" | "email" | "password";
+  label?: string;
   value?: string;
-  onChange?: (value: string) => void;
   placeholder?: string;
   disabled?: boolean;
-  icon?: React.ReactNode;
+  icon?: string;
   focused?: boolean;
   hint?: string;
   error?: boolean;
 }
 
 export function Input({
-  value = "",
-  onChange,
   placeholder = "",
   disabled = false,
   icon,
-  focused: propFocused = false,
   hint,
   error,
+  label,
 }: InputProps) {
-  const [focused, setFocused] = useState(propFocused);
+  const [value, setValue] = useState("");
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (onChange) {
-      onChange(event.target.value);
-    }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
   };
 
   return (
-    <div className={`input-container ${focused ? "focused" : ""}`}>
-      {icon && <div className="icon">{icon}</div>}
-      <input
-        type="text"
-        value={value}
-        onChange={handleChange}
-        placeholder={placeholder}
-        disabled={disabled}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
-      />
+    <label className={styles.label}>
+      {label}
+      <span className={styles.inputContainer}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        {icon && <img src={icon} alt="" className={styles.inputIcon} />}
+        <input
+          type="text"
+          value={value}
+          onChange={handleChange}
+          placeholder={placeholder}
+          disabled={disabled}
+          className={styles.input}
+        />
+        {error && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src="/icons/error-alert.svg"
+            alt="Error"
+            className={styles.errorIcon}
+          />
+        )}
+      </span>
       {error ? (
-        <p className={styles.errorFont}>This is an error message.</p>
+        <p className={styles.error}>This is an error message.</p>
       ) : hint ? (
-        <p className={styles.hintFont}>{hint}</p>
+        <p className={styles.hint}>{hint}</p>
       ) : null}
-    </div>
+    </label>
   );
 }
