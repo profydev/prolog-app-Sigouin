@@ -23,6 +23,7 @@
   .inputContainer {
     position: relative;
     display: flex;
+    align-items: center;
     font: font.$text-md-regular;
     padding: 0.625rem 0.875rem;
     gap: 0.5rem;
@@ -32,6 +33,7 @@
     width: 20rem;
 
     .input {
+      flex: 1;
       outline: transparent;
       border: none;
     }
@@ -40,24 +42,12 @@
       border-color: color.$primary-300;
       box-shadow:
         0 0 0 4px #f4ebff,
-        0 1px 2px 0 rgb(16 24 40 / 5%);
-    }
-
-    .error {
-      border-color: color.$error-300;
-    }
-
-    &[disabled] {
-      background-color: color.$gray-50;
-      border-color: color.$gray-300;
-      color: color.$gray-500;
+        0 1px 2px 0 rgb(142 153 173 / 5%);
     }
 
     .inputIcon {
-      position: absolute;
       left: 0.5rem;
       top: 50%;
-      transform: translateY(-50%);
     }
 
     .errorIcon {
@@ -67,4 +57,18 @@
       transform: translateY(-50%);
     }
   }
+}
+
+.label[data-disabled="true"] .inputContainer {
+  background-color: color.$gray-50;
+  border-color: color.$gray-300;
+  color: color.$gray-500;
+}
+
+.label[data-error="true"] .inputContainer {
+  border: 1px solid color.$error-300;
+}
+
+.label[data-error="true"] .inputContainer:focus-within {
+  box-shadow: 0 0 0 4px color.$error-100;
 }

@@ -39,4 +39,11 @@ WithError.args = {
 export const WithIcon = Template.bind({});
 WithIcon.args = {
   placeholder: "Enter text...",
+  icon: "/icons/mail.svg",
+};
+
+export const WithErrorAndIcon = Template.bind({});
+WithErrorAndIcon.args = {
+  ...WithIcon.args,
+  error: true,
 };

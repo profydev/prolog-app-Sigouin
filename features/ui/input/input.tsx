@@ -28,7 +28,7 @@ export function Input({
   };
 
   return (
-    <label className={styles.label}>
+    <label className={styles.label} data-error={error} data-disabled={disabled}>
       {label}
       <span className={styles.inputContainer}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
