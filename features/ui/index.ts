@@ -5,3 +5,4 @@ export * from "./error-screen";
 export * from "./checkbox";
 export * from "./customselect";
 export * from "./input";
+export * from "./modal";
