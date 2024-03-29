@@ -53,6 +53,8 @@ export function Modal() {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className={styles.modal}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/icons/contactmail.svg" alt="Email Us" />
                   <Dialog.Title as="h3" className={styles.title}>
                     Contact Us Via Email
                   </Dialog.Title>
