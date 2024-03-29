@@ -1,6 +1,7 @@
 import { useState, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import styles from "./modal.module.scss";
+import Link from "next/link";
 
 export function Modal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -64,9 +65,7 @@ export function Modal() {
 
                   <div id="modalButtons" className={styles.buttons}>
                     <button onClick={closeModal}>Cancel</button>
-                    <button onClick={() => setIsOpen(false)}>
-                      Open Email App
-                    </button>
+                    <Link href="mailto:prolog@profy.dev?">Open Email App</Link>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
