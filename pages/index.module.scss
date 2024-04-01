@@ -1,0 +1,40 @@
+@use "@styles/font";
+@use "@styles/color";
+@use "@styles/space";
+@use "@styles/breakpoint";
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  margin: 0;
+  text-align: center;
+  color: color.$gray-900;
+  font: font.$display-md-semibold;
+
+  @media (min-width: breakpoint.$desktop) {
+    font: font.$display-xl-semibold;
+  }
+}
+
+.subtitle {
+  width: 100%;
+  max-width: 40.5rem;
+  margin: space.$s4 0 space.$s16;
+  text-align: center;
+  color: color.$gray-700;
+  font: font.$text-md-regular;
+
+  @media (min-width: breakpoint.$desktop) {
+    margin: space.$s6 0 space.$s16;
+    font: font.$text-xl-regular;
+  }
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+}

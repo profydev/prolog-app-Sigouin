@@ -4,6 +4,7 @@ import { getContentPage } from "@api/content";
 import type { InferGetStaticPropsType, GetStaticProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import styles from "./index.module.scss";
 
 type PageProps = {
   page: Page;
@@ -31,14 +32,16 @@ const HomePage = ({ page }: InferGetStaticPropsType<typeof getStaticProps>) => {
         switch (section.sectionType) {
           case SectionType.Hero:
             return (
-              <section key={index}>
-                <h1>{section.title}</h1>
-                <p>{section.subtitle}</p>
+              <section className={styles.section} key={index}>
+                <h1 className={styles.title}>{section.title}</h1>
+                <p className={styles.subtitle}>{section.subtitle}</p>
                 <Image
                   src={section.image.src}
                   alt="Hero"
                   width={section.image.width}
                   height={section.image.height}
+                  priority
+                  className={styles.image}
                 />
               </section>
             );
