@@ -4,7 +4,7 @@ type Meta = {
   image: string;
 };
 
-enum SectionType {
+export enum SectionType {
   Hero = "hero",
 }
 
