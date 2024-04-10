@@ -21,7 +21,7 @@ export type Issue = {
 };
 
 export type IssueFilters = {
-  level?: IssueLevel | undefined;
-  status?: IssueStatus | undefined;
+  level?: IssueLevel;
+  status?: IssueStatus;
   project?: string;
 };
