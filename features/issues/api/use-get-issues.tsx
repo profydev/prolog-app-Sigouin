@@ -15,7 +15,7 @@ export function getQueryKey(page?: number, filters?: IssueFilters) {
 
 export function useGetIssues(page: number, filters: IssueFilters) {
   const query = useQuery<Page<Issue>, Error>(
-    getQueryKey(page),
+    getQueryKey(page, filters),
     ({ signal }) => getIssues(page, filters, { signal }),
     { keepPreviousData: true },
   );
