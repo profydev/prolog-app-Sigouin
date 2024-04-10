@@ -20,7 +20,8 @@ interface CustomSelectProps {
   error?: boolean;
   icon?: React.ReactNode;
   placeholder?: string;
-  options: OptionType[];
+  options?: OptionType[];
+  onChange?: (value: OptionType | null) => void;
 }
 
 const { Option, SingleValue } = components;
@@ -78,11 +79,16 @@ export function CustomSelect({
   error,
   placeholder = "",
   options,
+  onChange,
 }: CustomSelectProps) {
   const [selectedOption, setSelectedOption] = useState<OptionType | null>(null);
 
   const handleChange = (newValue: OptionType | null) => {
     setSelectedOption(newValue);
+
+    if (onChange) {
+      onChange(newValue);
+    }
   };
 
   const customStyles: StylesConfig<OptionType, false> = {
