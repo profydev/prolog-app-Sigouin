@@ -19,17 +19,9 @@ interface CustomSelectProps {
   disabled?: boolean;
   error?: boolean;
   icon?: React.ReactNode;
+  placeholder?: string;
+  options: OptionType[];
 }
-
-const options = [
-  { value: "Olivia Rhye", label: "Olivia Rhye", icon: "" },
-  { value: "Phoenix Baker", label: "Phoenix Baker" },
-  { value: "Lana Steiner", label: "Lana Steiner" },
-  { value: "Demi Wilkinson", label: "Demi Wilkinson" },
-  { value: "Candice Wu", label: "Candice Wu" },
-  { value: "Natali Craig", label: "Natali Craig" },
-  { value: "Drew Cano", label: "Drew Cano" },
-];
 
 const { Option, SingleValue } = components;
 
@@ -84,6 +76,8 @@ export function CustomSelect({
   hint,
   disabled,
   error,
+  placeholder = "",
+  options,
 }: CustomSelectProps) {
   const [selectedOption, setSelectedOption] = useState<OptionType | null>(null);
 
@@ -160,9 +154,9 @@ export function CustomSelect({
           value={selectedOption}
           onChange={handleChange}
           options={options}
-          placeholder="Select team member"
           styles={customStyles}
           isDisabled={disabled}
+          placeholder={placeholder}
           components={{
             Option: CustomSelectOption,
             SingleValue: CustomSelectValue,
