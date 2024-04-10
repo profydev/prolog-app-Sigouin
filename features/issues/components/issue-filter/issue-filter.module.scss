@@ -1,0 +1,20 @@
+@use "@styles/color";
+@use "@styles/space";
+@use "@styles/font";
+
+.filterContainer {
+  width: 100%;
+}
+
+.filterContent {
+  display: flex;
+}
+
+.resolveBtn {
+  margin-right: auto;
+}
+
+.right {
+  display: flex;
+  gap: 10px;
+}
