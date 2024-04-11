@@ -14,7 +14,15 @@
   margin-right: auto;
 }
 
-.right {
+.filters {
   display: flex;
   gap: 10px;
+}
+
+.selectFilter {
+  min-width: 10rem;
+}
+
+.inputFilter {
+  min-width: 17.5rem;
 }

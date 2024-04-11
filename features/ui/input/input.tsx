@@ -11,6 +11,8 @@ interface InputProps {
   focused?: boolean;
   hint?: string;
   error?: boolean;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 export function Input({
@@ -20,6 +22,7 @@ export function Input({
   hint,
   error,
   label,
+  ...props
 }: InputProps) {
   const [value, setValue] = useState("");
 
@@ -34,12 +37,12 @@ export function Input({
         {/* eslint-disable-next-line @next/next/no-img-element */}
         {icon && <img src={icon} alt="" className={styles.inputIcon} />}
         <input
-          type="text"
           value={value}
           onChange={handleChange}
           placeholder={placeholder}
           disabled={disabled}
           className={styles.input}
+          {...props}
         />
         {error && (
           // eslint-disable-next-line @next/next/no-img-element

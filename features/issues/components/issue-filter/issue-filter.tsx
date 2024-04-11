@@ -18,10 +18,22 @@ export function IssueFilter() {
     <div className={styles.filterContainer}>
       <div className={styles.filterContent}>
         <Button className={styles.resolveBtn}>Resolve Selected Issues</Button>
-        <div className={styles.right}>
-          <CustomSelect placeholder="Status" options={statusOptions} />
-          <CustomSelect placeholder="Level" options={levelOptions} />
-          <Input type="text" placeholder="Project Name"></Input>
+        <div className={styles.filters}>
+          <CustomSelect
+            className={styles.selectFilter}
+            placeholder="Status"
+            options={statusOptions}
+          />
+          <CustomSelect
+            className={styles.selectFilter}
+            placeholder="Level"
+            options={levelOptions}
+          />
+          <Input
+            className={styles.inputFilter}
+            type="text"
+            placeholder="Project Name"
+          ></Input>
         </div>
       </div>
     </div>

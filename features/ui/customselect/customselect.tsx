@@ -22,6 +22,8 @@ interface CustomSelectProps {
   placeholder?: string;
   options?: OptionType[];
   onChange?: (value: OptionType | null) => void;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 const { Option, SingleValue } = components;
@@ -80,6 +82,7 @@ export function CustomSelect({
   placeholder = "",
   options,
   onChange,
+  ...props
 }: CustomSelectProps) {
   const [selectedOption, setSelectedOption] = useState<OptionType | null>(null);
 
@@ -163,6 +166,7 @@ export function CustomSelect({
           styles={customStyles}
           isDisabled={disabled}
           placeholder={placeholder}
+          {...props}
           components={{
             Option: CustomSelectOption,
             SingleValue: CustomSelectValue,
