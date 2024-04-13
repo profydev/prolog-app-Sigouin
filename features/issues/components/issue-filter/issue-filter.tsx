@@ -9,7 +9,7 @@ interface OptionType {
 }
 
 const statusOptions = [
-  { label: "Open", value: IssueStatus.open },
+  { label: "Unresolved", value: IssueStatus.open },
   { label: "Resolved", value: IssueStatus.resolved },
 ];
 
@@ -36,15 +36,12 @@ export function IssueFilter() {
     });
   };
 
-  // const handleProjectNameChange = (
-  //   event: React.ChangeEvent<HTMLInputElement>,
-  // ) => {
-  //   const projectName = event.target.value;
-  //   router.push({
-  //     pathname: router.pathname,
-  //     query: { ...router.query, projectName: projectName || null },
-  //   });
-  // };
+  const handleProjectNameChange = (projectName: string) => {
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, project: projectName || null },
+    });
+  };
 
   return (
     <div className={styles.filterContainer}>
@@ -67,7 +64,7 @@ export function IssueFilter() {
         <Input
           type="text"
           placeholder="Project Name"
-          // onChange={handleProjectNameChange}
+          callbackFn={handleProjectNameChange}
         />
       </div>
     </div>
