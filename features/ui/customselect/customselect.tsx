@@ -111,6 +111,7 @@ export function CustomSelect({
       fontSize: "1rem",
       fontWeight: "400",
       borderRadius: "0.5rem",
+      height: "2.55rem",
       borderColor: isFocused
         ? "#D6BBFB"
         : isDisabled
