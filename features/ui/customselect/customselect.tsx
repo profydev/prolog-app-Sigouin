@@ -6,6 +6,7 @@ import Select, {
 } from "react-select";
 import { useState } from "react";
 import styles from "./customselect.module.scss";
+import classNames from "classnames";
 
 type OptionType = {
   value: string;
@@ -14,6 +15,7 @@ type OptionType = {
 };
 
 interface CustomSelectProps {
+  className?: string;
   label?: string;
   hint?: string;
   disabled?: boolean;
@@ -22,7 +24,6 @@ interface CustomSelectProps {
   placeholder?: string;
   options?: OptionType[];
   onChange?: (value: OptionType | null) => void;
-  className?: string;
   style?: React.CSSProperties;
 }
 
@@ -75,6 +76,7 @@ const CustomSelectValue = (props: SingleValueProps<OptionType>) => (
 );
 
 export function CustomSelect({
+  className,
   label,
   hint,
   disabled,
@@ -98,9 +100,9 @@ export function CustomSelect({
     option: (defaultStyles, { isSelected, isFocused }) => ({
       ...defaultStyles,
       color: "#101828",
-      backgroundColor: isSelected ? "#FCFAFF" : "transparent",
+      backgroundColor: isSelected ? "#FCFAFF" : "#FCFAFF",
       "&:active": {
-        backgroundColor: "transparent",
+        backgroundColor: "#FCFAFF",
       },
       ...(isFocused && { backgroundColor: "#FCFAFF" }),
     }),
@@ -108,7 +110,6 @@ export function CustomSelect({
       ...defaultStyles,
       fontSize: "1rem",
       fontWeight: "400",
-      width: "20rem",
       borderRadius: "0.5rem",
       borderColor: isFocused
         ? "#D6BBFB"
@@ -139,14 +140,13 @@ export function CustomSelect({
       border: "none",
     }),
     menu: () => ({
-      width: "20rem",
+      position: "absolute",
+      width: "100%",
       borderRadius: "0.5rem",
       boxShadow:
         "0px 4px 6px -2px rgba(16, 24, 40, 0.05), 0px 12px 16px -4px rgba(16, 24, 40, 0.10);",
     }),
-    menuList: () => ({
-      width: "20rem",
-    }),
+
     dropdownIndicator: (defaultStyles, { selectProps }) => ({
       ...defaultStyles,
       color: "#667085",
@@ -159,14 +159,14 @@ export function CustomSelect({
       <label className={styles.labelFont}>
         {label}
         <Select
-          className={styles.select}
+          {...props}
+          className={classNames(styles.select, className)}
           value={selectedOption}
           onChange={handleChange}
           options={options}
           styles={customStyles}
           isDisabled={disabled}
           placeholder={placeholder}
-          {...props}
           components={{
             Option: CustomSelectOption,
             SingleValue: CustomSelectValue,

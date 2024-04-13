@@ -3,26 +3,25 @@
 @use "@styles/font";
 
 .filterContainer {
-  width: 100%;
-}
-
-.filterContent {
   display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: space.$s4;
+  margin-bottom: space.$s6;
 }
 
-.resolveBtn {
-  margin-right: auto;
-}
-
-.filters {
-  display: flex;
-  gap: 10px;
-}
-
-.selectFilter {
+.filterItem {
   min-width: 10rem;
 }
 
 .inputFilter {
   min-width: 17.5rem;
 }
+
+// .resolveBtn {
+//   background-color: color.$primary-600;
+//   height: 44px;
+//   padding: 0.625rem 1.125rem;
+//   margin-right: space.$s4;
+//   color: white;
+// }

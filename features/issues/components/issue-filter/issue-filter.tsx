@@ -1,6 +1,12 @@
-import { CustomSelect, Input, Button } from "@features/ui";
-import styles from "./issue-filter.module.scss";
+import { CustomSelect, Input } from "@features/ui";
 import { IssueLevel, IssueStatus } from "@api/issues.types";
+import { useRouter } from "next/router";
+import styles from "./issue-filter.module.scss";
+
+interface OptionType {
+  value: string;
+  label: string;
+}
 
 const statusOptions = [
   { label: "Open", value: IssueStatus.open },
@@ -14,27 +20,55 @@ const levelOptions = [
 ];
 
 export function IssueFilter() {
+  const router = useRouter();
+
+  const handleStatusChange = (selectedOption: OptionType | null) => {
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, status: selectedOption?.value || null },
+    });
+  };
+
+  const handleLevelChange = (selectedOption: OptionType | null) => {
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, level: selectedOption?.value || null },
+    });
+  };
+
+  // const handleProjectNameChange = (
+  //   event: React.ChangeEvent<HTMLInputElement>,
+  // ) => {
+  //   const projectName = event.target.value;
+  //   router.push({
+  //     pathname: router.pathname,
+  //     query: { ...router.query, projectName: projectName || null },
+  //   });
+  // };
+
   return (
     <div className={styles.filterContainer}>
-      <div className={styles.filterContent}>
-        <Button className={styles.resolveBtn}>Resolve Selected Issues</Button>
-        <div className={styles.filters}>
-          <CustomSelect
-            className={styles.selectFilter}
-            placeholder="Status"
-            options={statusOptions}
-          />
-          <CustomSelect
-            className={styles.selectFilter}
-            placeholder="Level"
-            options={levelOptions}
-          />
-          <Input
-            className={styles.inputFilter}
-            type="text"
-            placeholder="Project Name"
-          ></Input>
-        </div>
+      {/* <Button className={styles.resolveBtn}>Resolve Selected Issues</Button> */}
+      <div className={styles.filterItem}>
+        <CustomSelect
+          placeholder="Status"
+          options={statusOptions}
+          onChange={handleStatusChange}
+        />
+      </div>
+      <div className={styles.filterItem}>
+        <CustomSelect
+          placeholder="Level"
+          options={levelOptions}
+          onChange={handleLevelChange}
+        />
+      </div>
+      <div className={styles.inputFilter}>
+        <Input
+          type="text"
+          placeholder="Project Name"
+          // onChange={handleProjectNameChange}
+        />
       </div>
     </div>
   );
