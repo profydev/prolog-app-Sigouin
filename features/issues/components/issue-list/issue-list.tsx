@@ -84,7 +84,10 @@ export function IssueList() {
             </button>
           </div>
           <div className={styles.pageInfo}>
-            Page <span className={styles.pageNumber}>{meta?.currentPage}</span>{" "}
+            Page{" "}
+            <span className={styles.pageNumber}>
+              {items.length ? meta?.currentPage : 0}
+            </span>{" "}
             of <span className={styles.pageNumber}>{meta?.totalPages}</span>
           </div>
         </div>
