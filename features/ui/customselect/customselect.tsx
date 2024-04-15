@@ -9,7 +9,7 @@ import styles from "./customselect.module.scss";
 import classNames from "classnames";
 
 type OptionType = {
-  value: string;
+  value: string | null;
   label: string;
   icon?: React.ReactNode;
 };

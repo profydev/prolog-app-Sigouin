@@ -3,17 +3,14 @@ import { IssueLevel, IssueStatus } from "@api/issues.types";
 import { useRouter } from "next/router";
 import styles from "./issue-filter.module.scss";
 
-interface OptionType {
-  value: string;
-  label: string;
-}
-
 const statusOptions = [
+  { label: "All", value: null },
   { label: "Unresolved", value: IssueStatus.open },
   { label: "Resolved", value: IssueStatus.resolved },
 ];
 
 const levelOptions = [
+  { label: "All", value: null },
   { label: "Info", value: IssueLevel.info },
   { label: "Warning", value: IssueLevel.warning },
   { label: "Error", value: IssueLevel.error },
@@ -22,24 +19,18 @@ const levelOptions = [
 export function IssueFilter() {
   const router = useRouter();
 
-  const handleStatusChange = (selectedOption: OptionType | null) => {
-    router.push({
-      pathname: router.pathname,
-      query: { ...router.query, status: selectedOption?.value || null },
-    });
-  };
+  const handleFilterChange = (filterType: string, value: string | null) => {
+    const query = { ...router.query };
 
-  const handleLevelChange = (selectedOption: OptionType | null) => {
-    router.push({
-      pathname: router.pathname,
-      query: { ...router.query, level: selectedOption?.value || null },
-    });
-  };
+    if (value === null || value.trim() === "") {
+      delete query[filterType];
+    } else {
+      query[filterType] = value;
+    }
 
-  const handleProjectNameChange = (projectName: string) => {
     router.push({
       pathname: router.pathname,
-      query: { ...router.query, project: projectName || null },
+      query,
     });
   };
 
@@ -50,21 +41,27 @@ export function IssueFilter() {
         <CustomSelect
           placeholder="Status"
           options={statusOptions}
-          onChange={handleStatusChange}
+          onChange={(selectedOption) =>
+            handleFilterChange("status", selectedOption?.value || null)
+          }
         />
       </div>
       <div className={styles.filterItem}>
         <CustomSelect
           placeholder="Level"
           options={levelOptions}
-          onChange={handleLevelChange}
+          onChange={(selectedOption) =>
+            handleFilterChange("level", selectedOption?.value || null)
+          }
         />
       </div>
       <div className={styles.inputFilter}>
         <Input
           type="text"
           placeholder="Project Name"
-          callbackFn={handleProjectNameChange}
+          callbackFn={(projectName) =>
+            handleFilterChange("project", projectName)
+          }
         />
       </div>
     </div>
