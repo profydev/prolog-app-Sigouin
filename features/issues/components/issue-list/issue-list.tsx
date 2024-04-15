@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useThrottle } from "@uidotdev/usehooks";
 import { ProjectLanguage } from "@api/projects.types";
 import { useGetProjects } from "@features/projects";
 import { useGetIssues } from "../../api/use-get-issues";
@@ -17,7 +18,8 @@ export function IssueList() {
     });
 
   const filters: IssueFilters = router.query;
-  const issuesPage = useGetIssues(page, filters);
+  const throttledFilter = useThrottle(filters, 500);
+  const issuesPage = useGetIssues(page, throttledFilter);
   const projects = useGetProjects();
 
   if (projects.isLoading || issuesPage.isLoading) {

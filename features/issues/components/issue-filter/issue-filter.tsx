@@ -22,7 +22,7 @@ export function IssueFilter() {
   const handleFilterChange = (filterType: string, value: string | null) => {
     const query = { ...router.query };
 
-    if (value === null || value.trim() === "") {
+    if (value === null || (typeof value === "string" && value.trim() === "")) {
       delete query[filterType];
     } else {
       query[filterType] = value;
@@ -39,6 +39,7 @@ export function IssueFilter() {
       {/* <Button className={styles.resolveBtn}>Resolve Selected Issues</Button> */}
       <div className={styles.filterItem}>
         <CustomSelect
+          data-testid="status-filter"
           placeholder="Status"
           options={statusOptions}
           onChange={(selectedOption) =>
@@ -48,6 +49,7 @@ export function IssueFilter() {
       </div>
       <div className={styles.filterItem}>
         <CustomSelect
+          data-testid="level-filter"
           placeholder="Level"
           options={levelOptions}
           onChange={(selectedOption) =>
@@ -57,6 +59,7 @@ export function IssueFilter() {
       </div>
       <div className={styles.inputFilter}>
         <Input
+          data-testid="project-filter"
           type="text"
           placeholder="Project Name"
           callbackFn={(projectName) =>
