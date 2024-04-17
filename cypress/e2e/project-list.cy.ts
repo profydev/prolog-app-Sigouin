@@ -33,9 +33,6 @@ describe("Project List", () => {
           cy.wrap($el).contains(mockProjects[index].numIssues);
           cy.wrap($el).contains(mockProjects[index].numEvents24h);
           cy.wrap($el).contains(statusNames[index]);
-          cy.wrap($el)
-            .find("a")
-            .should("have.attr", "href", "/dashboard/issues");
         });
     });
   });
@@ -75,5 +72,29 @@ describe("Error Screen Test", () => {
       .click();
 
     cy.get("[data-testid='project-list']").should("be.visible");
+  });
+});
+
+describe("Project Card View Issues Test", () => {
+  // const projectNames = ["Frontend - Web", "Backend", "ML Service"];
+
+  beforeEach(() => {
+    // Visit the page containing the project cards
+    cy.visit("http://localhost:3000/dashboard");
+  });
+
+  it("verifies the href attribute of View issues links for each project", () => {
+    // Iterate over each project name
+    cy.get("main")
+      .find("a")
+      .each((el, index) => {
+        cy.wrap(el).should(
+          "have.attr",
+          "href",
+          `/dashboard/issues?project=${encodeURIComponent(
+            mockProjects[index].name,
+          )}`,
+        );
+      });
   });
 });
