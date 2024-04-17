@@ -114,18 +114,10 @@ describe("Footer Navigation", () => {
           expect(versionText).to.match(/Version: \d+\.\d+\.\d+/);
         });
 
-      cy.get("footer")
-        .contains("Docs")
-        .should("have.attr", "href", "/dashboard#");
-      cy.get("footer")
-        .contains("API")
-        .should("have.attr", "href", "/dashboard#");
-      cy.get("footer")
-        .contains("Help")
-        .should("have.attr", "href", "/dashboard#");
-      cy.get("footer")
-        .contains("Community")
-        .should("have.attr", "href", "/dashboard#");
+      cy.get("footer").contains("Docs").should("have.attr", "href", "/#");
+      cy.get("footer").contains("API").should("have.attr", "href", "/#");
+      cy.get("footer").contains("Help").should("have.attr", "href", "/#");
+      cy.get("footer").contains("Community").should("have.attr", "href", "/#");
     });
   });
   context("mobile resolution", () => {
@@ -142,18 +134,10 @@ describe("Footer Navigation", () => {
           expect(versionText).to.match(/Version: \d+\.\d+\.\d+/);
         });
 
-      cy.get("footer")
-        .contains("Docs")
-        .should("have.attr", "href", "/dashboard#");
-      cy.get("footer")
-        .contains("API")
-        .should("have.attr", "href", "/dashboard#");
-      cy.get("footer")
-        .contains("Help")
-        .should("have.attr", "href", "/dashboard#");
-      cy.get("footer")
-        .contains("Community")
-        .should("have.attr", "href", "/dashboard#");
+      cy.get("footer").contains("Docs").should("have.attr", "href", "/#");
+      cy.get("footer").contains("API").should("have.attr", "href", "/#");
+      cy.get("footer").contains("Help").should("have.attr", "href", "/#");
+      cy.get("footer").contains("Community").should("have.attr", "href", "/#");
     });
   });
 });
