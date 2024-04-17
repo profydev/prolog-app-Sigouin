@@ -1,7 +1,9 @@
 import { useState } from "react";
+import classNames from "classnames";
 import styles from "./input.module.scss";
 
 interface InputProps {
+  className?: string;
   type: "text" | "number" | "email" | "password";
   label?: string;
   value?: string;
@@ -11,31 +13,37 @@ interface InputProps {
   focused?: boolean;
   hint?: string;
   error?: boolean;
+  callbackFn?: (value: string) => void;
 }
 
 export function Input({
+  className,
   placeholder = "",
   disabled = false,
   icon,
   hint,
   error,
   label,
+  callbackFn,
+  ...props
 }: InputProps) {
-  const [value, setValue] = useState("");
+  const [projectName, setProjectName] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
+    setProjectName(e.target.value);
+
+    if (callbackFn) callbackFn(e.target.value);
   };
 
   return (
     <label className={styles.label} data-error={error} data-disabled={disabled}>
       {label}
-      <span className={styles.inputContainer}>
+      <span className={classNames(styles.inputContainer, className)}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         {icon && <img src={icon} alt="" className={styles.inputIcon} />}
         <input
-          type="text"
-          value={value}
+          {...props}
+          value={projectName}
           onChange={handleChange}
           placeholder={placeholder}
           disabled={disabled}

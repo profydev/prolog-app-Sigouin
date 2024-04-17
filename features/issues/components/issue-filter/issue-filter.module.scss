@@ -1,0 +1,27 @@
+@use "@styles/color";
+@use "@styles/space";
+@use "@styles/font";
+
+.filterContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: space.$s4;
+  margin-bottom: space.$s6;
+}
+
+.filterItem {
+  min-width: 10rem;
+}
+
+.inputFilter {
+  min-width: 17.5rem;
+}
+
+// .resolveBtn {
+//   background-color: color.$primary-600;
+//   height: 44px;
+//   padding: 0.625rem 1.125rem;
+//   margin-right: space.$s4;
+//   color: white;
+// }

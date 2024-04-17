@@ -10,10 +10,10 @@ export function FooterNavigation() {
         <div className={styles.footerContent}>
           <div className={styles.version}>Version: {version}</div>
           <div className={styles.footerLinks}>
-            <Link href="#">Docs</Link>
-            <Link href="#">API</Link>
-            <Link href="#">Help</Link>
-            <Link href="#">Community</Link>
+            <Link href="/#">Docs</Link>
+            <Link href="/#">API</Link>
+            <Link href="/#">Help</Link>
+            <Link href="/#">Community</Link>
           </div>
           <div className={styles.logoContainer}>
             {/* eslint-disable-next-line @next/next/no-img-element */}

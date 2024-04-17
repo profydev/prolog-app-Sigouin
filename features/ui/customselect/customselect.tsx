@@ -6,30 +6,26 @@ import Select, {
 } from "react-select";
 import { useState } from "react";
 import styles from "./customselect.module.scss";
+import classNames from "classnames";
 
 type OptionType = {
-  value: string;
+  value: string | null;
   label: string;
   icon?: React.ReactNode;
 };
 
 interface CustomSelectProps {
+  className?: string;
   label?: string;
   hint?: string;
   disabled?: boolean;
   error?: boolean;
   icon?: React.ReactNode;
+  placeholder?: string;
+  options?: OptionType[];
+  onChange?: (value: OptionType | null) => void;
+  style?: React.CSSProperties;
 }
-
-const options = [
-  { value: "Olivia Rhye", label: "Olivia Rhye", icon: "" },
-  { value: "Phoenix Baker", label: "Phoenix Baker" },
-  { value: "Lana Steiner", label: "Lana Steiner" },
-  { value: "Demi Wilkinson", label: "Demi Wilkinson" },
-  { value: "Candice Wu", label: "Candice Wu" },
-  { value: "Natali Craig", label: "Natali Craig" },
-  { value: "Drew Cano", label: "Drew Cano" },
-];
 
 const { Option, SingleValue } = components;
 
@@ -59,9 +55,9 @@ const CustomSelectOption = (props: OptionProps<OptionType>) => (
             <path
               d="M16.6668 5L7.50016 14.1667L3.3335 10"
               stroke="#7F56D9"
-              stroke-width="1.66667"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.66667"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         </span>
@@ -80,24 +76,33 @@ const CustomSelectValue = (props: SingleValueProps<OptionType>) => (
 );
 
 export function CustomSelect({
+  className,
   label,
   hint,
   disabled,
   error,
+  placeholder = "",
+  options,
+  onChange,
+  ...props
 }: CustomSelectProps) {
   const [selectedOption, setSelectedOption] = useState<OptionType | null>(null);
 
   const handleChange = (newValue: OptionType | null) => {
     setSelectedOption(newValue);
+
+    if (onChange) {
+      onChange(newValue);
+    }
   };
 
   const customStyles: StylesConfig<OptionType, false> = {
     option: (defaultStyles, { isSelected, isFocused }) => ({
       ...defaultStyles,
       color: "#101828",
-      backgroundColor: isSelected ? "#FCFAFF" : "transparent",
+      backgroundColor: isSelected ? "#FCFAFF" : "#FCFAFF",
       "&:active": {
-        backgroundColor: "transparent",
+        backgroundColor: "#FCFAFF",
       },
       ...(isFocused && { backgroundColor: "#FCFAFF" }),
     }),
@@ -105,8 +110,8 @@ export function CustomSelect({
       ...defaultStyles,
       fontSize: "1rem",
       fontWeight: "400",
-      width: "20rem",
       borderRadius: "0.5rem",
+      height: "2.55rem",
       borderColor: isFocused
         ? "#D6BBFB"
         : isDisabled
@@ -136,14 +141,13 @@ export function CustomSelect({
       border: "none",
     }),
     menu: () => ({
-      width: "20rem",
+      position: "absolute",
+      width: "100%",
       borderRadius: "0.5rem",
       boxShadow:
         "0px 4px 6px -2px rgba(16, 24, 40, 0.05), 0px 12px 16px -4px rgba(16, 24, 40, 0.10);",
     }),
-    menuList: () => ({
-      width: "20rem",
-    }),
+
     dropdownIndicator: (defaultStyles, { selectProps }) => ({
       ...defaultStyles,
       color: "#667085",
@@ -156,13 +160,14 @@ export function CustomSelect({
       <label className={styles.labelFont}>
         {label}
         <Select
-          className={styles.select}
+          {...props}
+          className={classNames(styles.select, className)}
           value={selectedOption}
           onChange={handleChange}
           options={options}
-          placeholder="Select team member"
           styles={customStyles}
           isDisabled={disabled}
+          placeholder={placeholder}
           components={{
             Option: CustomSelectOption,
             SingleValue: CustomSelectValue,
