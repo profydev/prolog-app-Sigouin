@@ -73,6 +73,33 @@ describe("Issue List", () => {
       cy.contains("Page 2 of 3");
       cy.get("tbody tr:first").contains(mockIssues2.items[0].message);
     });
+    // css-1dimb5e-singleValue
+    // css-1fdsijx-valueContainer
+    // css-qbdosj-Input
+
+    // it.only("filters by status", () => {
+    //   // Interact with the status filter select
+    //   cy.intercept("GET", "https://prolog-api.profy.dev/issue?page=1&level=error").as("getIssuesError");
+    //   cy.get('.css-yw2vvz-control').click({ multiple: true}).as('statusFilter');
+    //   cy.get('.css-1dimb5e-singleValue').contains("Error").click();
+
+    //   cy.url().should("include", "level=error");
+    //   cy.get("table tbody tr td:nth-child(2)").each(($el) => {
+    //     cy.wrap($el).contains("Error");
+    //   });
+    // });
+
+    it("filters by project", () => {
+      // Type a project name in the project filter input
+      cy.intercept(
+        "GET",
+        "https://prolog-api.profy.dev/issue?page=1&project=frontend",
+      ).as("getProjectName");
+      cy.get('[data-testid="project-filter"]').type("frontend");
+      cy.url().should("include", "project=frontend");
+      // Check the URL contains the project query parameter
+      cy.url().should("include", "project=frontend");
+    });
 
     it("persists page after reload", () => {
       cy.get("@next-button").click();
