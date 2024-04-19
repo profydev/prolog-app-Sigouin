@@ -1,6 +1,7 @@
 @use "@styles/color";
 @use "@styles/space";
 @use "@styles/font";
+@use "@styles/breakpoint";
 
 .filterContainer {
   display: flex;
@@ -8,6 +9,11 @@
   align-items: center;
   gap: space.$s4;
   margin-bottom: space.$s6;
+
+  @media (max-width: breakpoint.$desktop) {
+    flex-direction: column;
+    gap: 0;
+  }
 }
 
 .filterItem {
@@ -16,6 +22,13 @@
 
 .inputFilter {
   min-width: 17.5rem;
+}
+
+@media (max-width: breakpoint.$desktop) {
+  .filterItem,
+  .inputFilter {
+    width: 100%;
+  }
 }
 
 // .resolveBtn {

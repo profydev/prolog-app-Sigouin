@@ -142,6 +142,7 @@ export function CustomSelect({
     }),
     menu: () => ({
       position: "absolute",
+      zIndex: 9999,
       width: "100%",
       borderRadius: "0.5rem",
       boxShadow:

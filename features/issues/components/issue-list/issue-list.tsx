@@ -58,7 +58,7 @@ export function IssueList() {
               <th className={styles.headerCell}>Users</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className={styles.tbody}>
             {(items || []).map((issue) => (
               <IssueRow
                 key={issue.id}
@@ -69,7 +69,7 @@ export function IssueList() {
           </tbody>
         </table>
         <div className={styles.paginationContainer}>
-          <div>
+          <div className={styles.mobileBtn}>
             <button
               className={styles.paginationButton}
               onClick={() => navigateToPage(page - 1)}
