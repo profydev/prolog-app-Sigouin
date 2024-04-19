@@ -29,7 +29,7 @@ export function IssueRow({ projectLanguage, issue }: IssueRowProps) {
           src={`/icons/${projectLanguage}.svg`}
           alt={projectLanguage}
         />
-        <div>
+        <div className={styles.errorInfo}>
           <div className={styles.errorTypeAndMessage}>
             <span className={styles.errorType}>{name}:&nbsp;</span>
             {message}
@@ -38,12 +38,20 @@ export function IssueRow({ projectLanguage, issue }: IssueRowProps) {
         </div>
       </td>
       <td className={styles.cell}>
+        <div className={styles.cellMobile}>Status</div>
         <Badge color={levelColors[level]} size={BadgeSize.sm}>
           {capitalize(level)}
         </Badge>
       </td>
-      <td className={styles.cell}>{numEvents}</td>
-      <td className={styles.cell}>{numUsers}</td>
+
+      <td className={styles.cell}>
+        <div className={styles.cellMobile}>Events</div>
+        {numEvents}
+      </td>
+      <td className={styles.cell}>
+        <div className={styles.cellMobile}>Users</div>
+        {numUsers}
+      </td>
     </tr>
   );
 }
